@@ -3,15 +3,14 @@
     "",
     "\\src",
     "\\src\\app",
-    "\\src\\app\\layout",
-    "\\src\\app\\layout\\top-nav",
     "\\src\\app\\models",
-    "\\src\\app\\models\\api-models",
     "\\src\\app\\models\\ui-models",
     "\\src\\app\\services",
     "\\src\\app\\students",
-    "\\src\\app\\students\\view-student"
+    "\\src\\app\\students\\view-student",
+    "\\src\\assets",
+    "\\src\\environments"
   ],
-  "SelectedNode": "\\src\\app\\models\\api-models\\update-student-request.model.ts",
+  "SelectedNode": "\\src\\environments\\environment.prod.ts",
   "PreviewInSolutionExplorer": false
 }
