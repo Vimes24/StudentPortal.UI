@@ -12,5 +12,6 @@
     "\\src\\app\\students",
     "\\src\\app\\students\\view-student"
   ],
+  "SelectedNode": "\\src\\app\\models\\api-models\\update-student-request.model.ts",
   "PreviewInSolutionExplorer": false
 }

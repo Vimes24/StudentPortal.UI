@@ -21,7 +21,7 @@ export class ViewStudentComponent implements OnInit {
     email: '',
     phoneNumber: '',
     genderId: '',
-    profileImageUri: '',
+    profileImageUrl: '',
     gender: {
       id: '',
       description: ''
@@ -35,6 +35,7 @@ export class ViewStudentComponent implements OnInit {
 
   isNewStudent = true;
   header = '';
+  displayProfileImageUrl = '';
 
   genderList: Gender[] = [];
 
@@ -53,6 +54,7 @@ export class ViewStudentComponent implements OnInit {
         if (this.studentId.toLowerCase() == 'Add'.toLowerCase()) {
           this.isNewStudent = true;
           this.header = 'Add New Student';
+          this.setImage();
         }
         else {
           this.isNewStudent = false;
@@ -60,7 +62,9 @@ export class ViewStudentComponent implements OnInit {
           this.studentService.getStudent(this.studentId)
             .subscribe((successResponse) => {
               this.student = successResponse;
-            });
+              this.setImage();
+            },
+              (errorResponse) => { this.setImage();});
         }
 
         this.genderService.getGenderList()
@@ -119,5 +123,31 @@ export class ViewStudentComponent implements OnInit {
         (errorResponse) => {
           console.log(errorResponse);
         });
+  }
+
+  uploadImage(event: any): void {
+    if (this.studentId) {
+      const file: File = event.target.files[0];
+      this.studentService.uploadImage(this.student.id, file)
+        .subscribe(
+          (successResponse) => {
+            this.student.profileImageUrl = successResponse;
+            this.setImage();
+
+            this.snackbar.open('Image updated', undefined, {
+              duration: 2000
+            });
+          },
+          (errorResponse) => { });
+    }
+}
+
+  private setImage(): void {
+    if (this.student.profileImageUrl) {
+      this.displayProfileImageUrl = this.studentService.getImagePath(this.student.profileImageUrl);
+    }
+    else {
+      this.displayProfileImageUrl = '/assets/testUser.png';
+    }
   }
 }
